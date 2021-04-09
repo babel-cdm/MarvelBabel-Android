@@ -4,13 +4,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.babel.marvel.R
 import com.babel.marvel.base.BaseFragment
 import com.babel.marvel.databinding.FragmentHomeBinding
 import com.babel.marvel.domain.datastate.DataState
+import com.babel.marvel.domain.viewstate.CharactersListViewState
 import com.babel.marvel.events.MarvelEventState
 import com.babel.marvel.features.main.MainViewModel
 import com.babel.marvel.features.main.adapter.ListCharacterAdapter
@@ -20,9 +20,9 @@ import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 @FlowPreview
 @ExperimentalCoroutinesApi
-class HomeFragment : BaseFragment(R.layout.fragment_home) {
+class HomeFragment : BaseFragment<CharactersListViewState>(R.layout.fragment_home) {
 
-    private val viewModel: MainViewModel by sharedViewModel()
+    override val viewModel: MainViewModel by sharedViewModel()
 
     lateinit var binding: FragmentHomeBinding
 
@@ -32,11 +32,6 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
         savedInstanceState: Bundle?
     ): View {
         binding = FragmentHomeBinding.inflate(inflater, container, false)
-        return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
 
         viewModel.setEventState(
             MarvelEventState.LoadingDataEvent
@@ -44,37 +39,27 @@ class HomeFragment : BaseFragment(R.layout.fragment_home) {
 
         binding.rvCompleteList.layoutManager = LinearLayoutManager(requireContext(), RecyclerView.VERTICAL, false)
 
-        subscribeObservers()
+        return binding.root
     }
 
-    private fun subscribeObservers() {
-        viewModel.dataState.observe(
-            viewLifecycleOwner,
-            { dataState ->
-                dataStateChangeListener?.onDataStateChangeListener(dataState)
-                when (dataState) {
-                    is DataState.SUCCESS -> {
-                        dataState.data?.let { viewState ->
-                            viewState.characterFields?.listCharacters?.let { list ->
-                                binding.rvCompleteList.adapter?.let {
-                                    (it as ListCharacterAdapter).notifyDataSetChanged()
-                                } ?: kotlin.run {
-                                    binding.rvCompleteList.adapter = ListCharacterAdapter(list) {
-                                        navRegistration(it)
-                                    }
-                                }
-                            }
-                        }
-                    }
+    override fun onUpdateView(data: CharactersListViewState) {
+        data.characterFields?.listCharacters?.let { list ->
+            binding.rvCompleteList.adapter?.let {
+                (it as ListCharacterAdapter).notifyDataSetChanged()
+            } ?: kotlin.run {
+                binding.rvCompleteList.adapter = ListCharacterAdapter(list) {
+                    navRegistration(it)
                 }
             }
-        )
+        }
+    }
+
+    override fun onErrorView(data: DataState.ERROR<CharactersListViewState>) {
+        // Do extra stuff if necessary
     }
 
     private fun navRegistration(idCharacter: Int) {
         viewModel.registerIdSelected(idCharacter)
-        val bundle = Bundle()
-        bundle.putSerializable("VM", viewModel.getCurrentViewStateOrNew())
-        findNavController().navigate(R.id.action_loginFragment_to_registerFragment, bundle)
+        viewModel.navigate(R.id.action_loginFragment_to_registerFragment, viewModel.getCurrentViewStateOrNew())
     }
 }

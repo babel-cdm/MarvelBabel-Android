@@ -4,6 +4,7 @@ import android.content.Context
 import android.view.inputmethod.InputMethodManager
 import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModel
 import com.babel.marvel.common.*
 import com.babel.marvel.domain.datastate.DataState
 import com.babel.marvel.domain.datastate.StateMessage
@@ -13,6 +14,8 @@ abstract class BaseActivity(@LayoutRes contentLayoutId: Int) :
     AppCompatActivity(contentLayoutId),
     DataStateChangeListener,
     UICommunicationListener {
+
+    abstract val viewModel: ViewModel
 
     override fun onUIMessageReceived(stateMessage: StateMessage) {
         when (stateMessage.uiComponentType) {
@@ -55,11 +58,11 @@ abstract class BaseActivity(@LayoutRes contentLayoutId: Int) :
                 Context.INPUT_METHOD_SERVICE
             ) as InputMethodManager
 
-            inputMethodManager.hideSoftInputFromWindow(currentFocus.windowToken, DEFAUL_FLAG)
+            inputMethodManager.hideSoftInputFromWindow(currentFocus.windowToken, DEFAULT_FLAG)
         }
     }
 
     companion object {
-        const val DEFAUL_FLAG = 0
+        const val DEFAULT_FLAG = 0
     }
 }

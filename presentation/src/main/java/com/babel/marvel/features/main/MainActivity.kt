@@ -14,18 +14,18 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 @ExperimentalCoroutinesApi
 class MainActivity : BaseActivity(R.layout.activity_main) {
 
-    private val mainViewModel: MainViewModel by viewModel()
+    override val viewModel: MainViewModel by viewModel()
 
-    private var binding: ActivityMainBinding? = null
+    private lateinit var binding: ActivityMainBinding
 
     override fun onCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
         super.onCreate(savedInstanceState, persistentState)
         binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding?.root)
+        setContentView(binding.root)
     }
 
     override fun displayLoading(isLoading: Boolean) {
-        binding?.progressBar?.visibility = if (isLoading) {
+        binding.progressBar.visibility = if (isLoading) {
             View.VISIBLE
         } else {
             View.GONE
