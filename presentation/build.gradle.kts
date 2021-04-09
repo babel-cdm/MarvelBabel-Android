@@ -15,12 +15,12 @@ android {
                 srcDirs("src/main/java")
             }
         }
-        getByName("test"){
+        getByName("test") {
             java {
                 srcDirs("src/test/java")
             }
         }
-        getByName("androidTest"){
+        getByName("androidTest") {
             java {
                 srcDirs("src/androidTest/java")
             }

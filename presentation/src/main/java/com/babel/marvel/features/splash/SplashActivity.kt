@@ -15,7 +15,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 @ExperimentalCoroutinesApi
 class SplashActivity : BaseActivity(R.layout.activity_splash) {
 
-    private val authViewModel: MainViewModel by viewModel()
+    override val viewModel: MainViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,7 +27,8 @@ class SplashActivity : BaseActivity(R.layout.activity_splash) {
             {
                 startActivity(Intent(this, MainActivity::class.java))
                 finish()
-            }, TIME_OUT
+            },
+            TIME_OUT
         )
     }
 

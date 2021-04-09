@@ -8,10 +8,10 @@ import com.babel.marvel.domain.viewstate.CharactersListViewState
 import com.nhaarman.mockitokotlin2.mock
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.runBlocking
+import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
 import org.mockito.Mockito
-import org.junit.Assert
 
 class RepositoryUnitTest {
 
@@ -20,14 +20,14 @@ class RepositoryUnitTest {
     private lateinit var getSingleCharacterUseCase: GetSingleCharacterUseCase
 
     @Before
-    fun setUp(){
+    fun setUp() {
         getAllCharacterUseCase = GetAllCharacterUseCase(repository)
         getSingleCharacterUseCase = GetSingleCharacterUseCase(repository)
     }
 
     @Test
     fun `Get character list`() = runBlocking {
-        val repoResult : Flow<DataState<CharactersListViewState>> = getAllCharacterUseCase.invoke()
+        val repoResult: Flow<DataState<CharactersListViewState>> = getAllCharacterUseCase.invoke()
         Mockito.`when`(repository.getCharacters()).thenReturn(repoResult)
         val result: Flow<DataState<CharactersListViewState>> = getAllCharacterUseCase.invoke()
         Assert.assertEquals(repoResult, result)
@@ -35,7 +35,7 @@ class RepositoryUnitTest {
 
     @Test
     fun `Get single character`() = runBlocking {
-        val repoResult : Flow<DataState<CharactersListViewState>> = getSingleCharacterUseCase.invoke(DEFAULT_ID_CHARACTER)
+        val repoResult: Flow<DataState<CharactersListViewState>> = getSingleCharacterUseCase.invoke(DEFAULT_ID_CHARACTER)
         Mockito.`when`(repository.getSingleCharacter(DEFAULT_ID_CHARACTER)).thenReturn(repoResult)
         val result: Flow<DataState<CharactersListViewState>> = getSingleCharacterUseCase.invoke(DEFAULT_ID_CHARACTER)
         Assert.assertEquals(repoResult, result)
@@ -44,5 +44,4 @@ class RepositoryUnitTest {
     companion object {
         const val DEFAULT_ID_CHARACTER = 123
     }
-
 }

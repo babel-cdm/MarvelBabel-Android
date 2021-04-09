@@ -5,11 +5,10 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.babel.marvel.R
 import com.babel.marvel.databinding.LayoutCharacterBinding
+import com.babel.marvel.domain.Constants
 import com.babel.marvel.domain.viewstate.Character
 import com.bumptech.glide.Glide
-import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
-import com.bumptech.glide.request.RequestOptions
 
 class ListCharacterAdapter(
     private val userList: List<Character>,
@@ -37,7 +36,7 @@ class ListCharacterAdapter(
             binding.tvCharacterTitle.text = character.name
             binding.tvCharacterDescription.text = character.description
             Glide.with(itemView)
-                .load(character.thumbnail.path + DOT_EXTENSION + character.thumbnail.extension)
+                .load(character.thumbnail.path + Constants.DOT_SYMBOL + character.thumbnail.extension)
                 .error(R.drawable.ic_marvel)
                 .placeholder(R.drawable.ic_marvel)
                 .transform(RoundedCorners(RADIUS_CORNER))
@@ -47,6 +46,5 @@ class ListCharacterAdapter(
 
     companion object {
         const val RADIUS_CORNER = 16
-        const val DOT_EXTENSION = "."
     }
 }
