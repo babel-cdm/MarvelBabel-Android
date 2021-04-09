@@ -2,9 +2,7 @@ package com.babel.marvel.base
 
 import android.content.Context
 import android.view.inputmethod.InputMethodManager
-import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModel
 import com.babel.marvel.common.*
 import com.babel.marvel.domain.datastate.DataState
 import com.babel.marvel.domain.datastate.StateMessage
