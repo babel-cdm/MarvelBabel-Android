@@ -2,13 +2,13 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="10dp"
+    android:padding="@dimen/small_spacing"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cvContainer"
-        app:cardCornerRadius="15dp"
+        app:cardCornerRadius="@dimen/corner_radius_size"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -19,7 +19,7 @@
             <ImageView
                 android:id="@+id/ivCharacterImage"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
+                android:layout_height="@dimen/match_constraint"
                 android:scaleType="centerCrop"
                 tools:src="@drawable/ic_marvel"
                 app:layout_constraintDimensionRatio="H,1.4:1"
@@ -28,7 +28,7 @@
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
+                android:layout_height="@dimen/match_constraint"
                 android:background="#D5404040"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"/>
@@ -40,8 +40,8 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 android:fontFamily="@font/marvel_font"
-                android:layout_margin="20dp"
-                android:textSize="32sp"
+                android:layout_margin="@dimen/default_spacing"
+                android:textSize="@dimen/title_text_size"
                 android:textAllCaps="true"
                 android:textColor="@color/text_card_color"
                 tools:text="IRON-MAN"/>
@@ -52,8 +52,8 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                android:textSize="16sp"
-                android:layout_margin="20dp"
+                android:textSize="@dimen/default_text_size"
+                android:layout_margin="@dimen/default_spacing"
                 android:textColor="@color/text_card_color"
                 tools:text="Mas información" />
 
