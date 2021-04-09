@@ -16,11 +16,12 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 const val BASE_URL = "https://gateway.marvel.com:443/v1/public/"
 const val TIME_OUT = 30L
-const val API_KEY_VALUE_PUBLIC = "aefc4306dbd7230cba8a1cf940e8c5c8"
-const val API_KEY_VALUE_PRIVATE = "1de8e5f20f9d2a29b5604ebad23f6dc4ae59cd55"
+const val API_KEY_VALUE_PUBLIC = "ba9dbe77040fd5833bcd484fa79a0452"
+const val API_KEY_VALUE_PRIVATE = "0ed42722f083f074f95e8f9cb1ea9607c5781946"
 const val API_KEY = "apikey"
 const val TS_KEY = "ts"
 const val HASH_KEY = "hash"
+const val FORMAT_MD5 = "MD5"
 
 val remoteModule = module {
 
@@ -66,6 +67,6 @@ fun provideMarvelAPI(retrofit: Retrofit): MarvelApiService =
     retrofit.create(MarvelApiService::class.java)
 
 fun md5(input: String): String {
-    val md = MessageDigest.getInstance("MD5")
+    val md = MessageDigest.getInstance(FORMAT_MD5)
     return BigInteger(1, md.digest(input.toByteArray())).toString(16).padStart(32, '0')
 }
