@@ -13,7 +13,7 @@ import kotlinx.coroutines.FlowPreview
 
 @FlowPreview
 @ExperimentalCoroutinesApi
-abstract class BaseFragment<ViewState>(contentLayoutId: Int) : Fragment(contentLayoutId) {
+abstract class BaseFragment<ViewState>() : Fragment() {
 
     private var dataStateChangeListener: DataStateChangeListener? = null
     private var uiCommunicationListener: UICommunicationListener? = null
