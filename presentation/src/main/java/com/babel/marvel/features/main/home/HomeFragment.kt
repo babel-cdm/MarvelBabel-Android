@@ -20,7 +20,7 @@ import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 @FlowPreview
 @ExperimentalCoroutinesApi
-class HomeFragment : BaseFragment<CharactersListViewState>(R.layout.fragment_home) {
+class HomeFragment : BaseFragment<CharactersListViewState>() {
 
     override val viewModel: MainViewModel by sharedViewModel()
 

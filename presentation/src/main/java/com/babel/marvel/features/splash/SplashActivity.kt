@@ -3,23 +3,23 @@ package com.babel.marvel.features.splash
 import android.content.Intent
 import android.os.Bundle
 import android.os.Looper
-import com.babel.marvel.R
 import com.babel.marvel.base.BaseActivity
+import com.babel.marvel.databinding.ActivitySplashBinding
 import com.babel.marvel.features.main.MainActivity
-import com.babel.marvel.features.main.MainViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
-import org.koin.androidx.viewmodel.ext.android.viewModel
 
 @FlowPreview
 @ExperimentalCoroutinesApi
-class SplashActivity : BaseActivity(R.layout.activity_splash) {
+class SplashActivity : BaseActivity() {
 
-    override val viewModel: MainViewModel by viewModel()
+    lateinit var binding: ActivitySplashBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         navMainActivity()
+        binding = ActivitySplashBinding.inflate(layoutInflater)
+        setContentView(binding.root)
     }
 
     private fun navMainActivity() {

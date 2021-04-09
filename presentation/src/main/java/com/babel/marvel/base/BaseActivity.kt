@@ -10,12 +10,10 @@ import com.babel.marvel.domain.datastate.DataState
 import com.babel.marvel.domain.datastate.StateMessage
 import com.babel.marvel.domain.datastate.UIComponentType
 
-abstract class BaseActivity(@LayoutRes contentLayoutId: Int) :
-    AppCompatActivity(contentLayoutId),
+abstract class BaseActivity :
+    AppCompatActivity(),
     DataStateChangeListener,
     UICommunicationListener {
-
-    abstract val viewModel: ViewModel
 
     override fun onUIMessageReceived(stateMessage: StateMessage) {
         when (stateMessage.uiComponentType) {

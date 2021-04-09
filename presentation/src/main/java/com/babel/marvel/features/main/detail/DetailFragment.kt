@@ -25,7 +25,7 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 @FlowPreview
 @ExperimentalCoroutinesApi
-class DetailFragment : BaseFragment<CharactersListViewState>(R.layout.fragment_detail) {
+class DetailFragment : BaseFragment<CharactersListViewState>() {
 
     override val viewModel: DetailViewModel by viewModel()
 

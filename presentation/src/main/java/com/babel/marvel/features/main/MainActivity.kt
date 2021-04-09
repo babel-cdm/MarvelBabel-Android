@@ -1,26 +1,24 @@
 package com.babel.marvel.features.main
 
 import android.os.Bundle
-import android.os.PersistableBundle
 import android.view.View
-import com.babel.marvel.R
 import com.babel.marvel.base.BaseActivity
-import com.babel.marvel.databinding.ActivityMainBinding
+import com.babel.marvel.databinding.ActivityDashboardBinding
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 @FlowPreview
 @ExperimentalCoroutinesApi
-class MainActivity : BaseActivity(R.layout.activity_main) {
+class MainActivity : BaseActivity() {
 
-    override val viewModel: MainViewModel by viewModel()
+    private val mainViewModel: MainViewModel by viewModel()
 
-    private lateinit var binding: ActivityMainBinding
+    lateinit var binding: ActivityDashboardBinding
 
-    override fun onCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
-        super.onCreate(savedInstanceState, persistentState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        binding = ActivityDashboardBinding.inflate(layoutInflater)
         setContentView(binding.root)
     }
 
